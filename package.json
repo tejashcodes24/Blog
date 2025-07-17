@@ -1,0 +1,26 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon api/index.js",
+    "start" : "node api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tejashcodes24/Blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/tejashcodes24/Blog/issues"
+  },
+  "homepage": "https://github.com/tejashcodes24/Blog#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
