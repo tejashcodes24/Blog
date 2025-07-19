@@ -7,6 +7,7 @@ import SignIn from './pages/SignIn'
 import SignUp from './pages/SignUp'
 import Header from './components/Header'
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
+import Footer from './components/Footer'
 const App = () => {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/dashboard' element = {<Dashboard />} />
         <Route path='/project' element = {<Project />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }
