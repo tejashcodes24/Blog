@@ -11,4 +11,5 @@ export default {
     extend: {},
   },
   plugins: [flowbiteReact],
+  darkMode: 'class', // <-- this is required
 }
