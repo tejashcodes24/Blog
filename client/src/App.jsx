@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp'
 import Header from './components/Header'
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
 import Footer from './components/Footer'
+import PrivateRoute from './components/PrivateRoute'
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,7 +18,9 @@ const App = () => {
         <Route path='/about' element = {<About />} />
         <Route path = '/sign-in' element = {<SignIn />} />
         <Route path = '/sign-up' element = {<SignUp />} />
-        <Route path='/dashboard' element = {<Dashboard />} />
+        <Route element={<PrivateRoute />}>
+          <Route path='/dashboard' element = {<Dashboard />} />
+        </Route>        
         <Route path='/project' element = {<Project />} />
       </Routes>
       <Footer />
