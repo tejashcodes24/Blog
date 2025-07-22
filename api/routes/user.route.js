@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get('/test',test);
 
+router.put('/update:userId',updateUser);
+
 export default router;
