@@ -1,6 +1,6 @@
 import { errorHandler } from "../utils/error.js";
 import bcryptjs from 'bcryptjs'
-import User from "../models/user.model";
+import User from "../models/user.model.js";
 
 export const test = (req,res) => {
     res.json({message : 'API is working'});
@@ -29,6 +29,7 @@ export const updateUser = async (req,res,next) => {
         if(!req.body.username.match(/^[a-zA-Z0-9]+$/)){
             return next(errorHandler(400,'Username can only contain letters and numbers'));
         }
+    }
         try {
             const updatedUser = await User.findByIdAndUpdate(req.params.userId,{
                 $set : {
@@ -44,5 +45,3 @@ export const updateUser = async (req,res,next) => {
             next(error);
         }
     }
-    
-}
