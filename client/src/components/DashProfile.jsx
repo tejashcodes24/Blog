@@ -1,9 +1,10 @@
 import { Alert, Button, Modal, ModalBody, ModalHeader, TextInput } from 'flowbite-react'
 import React, { useEffect, useRef, useState } from 'react'
 import {useSelector} from 'react-redux'
-import { updateStart,updateSuccess,updateFailure, deleteUserStart , deleteUserFailure,deleteUserSuccess } from '../redux/user/userSlice'
+import { updateStart,updateSuccess,updateFailure, deleteUserStart , deleteUserFailure,deleteUserSuccess, signoutSuccess } from '../redux/user/userSlice'
 import { useDispatch } from 'react-redux'
 import {HiOutlineExclamationCircle} from 'react-icons/hi'
+import { useNavigate } from 'react-router-dom'
 
 const DashProfile = () => {
   const {currentUser, error} = useSelector(state => state.user);
@@ -17,6 +18,7 @@ const DashProfile = () => {
 
   })
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if(file){
@@ -90,6 +92,25 @@ const DashProfile = () => {
       dispatch(deleteUserFailure(error.message));
     }
   }
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch('/api/user/signout',{
+        method: 'POST',
+      });
+      const data = await res.json();
+      if(!res.ok){
+
+      }
+      else{
+        dispatch(signoutSuccess());
+        navigate('/sign-in');
+      }
+    }
+    catch(error){
+
+    }
+  }
   return (
     <div className='max-w-lg mx-auto p-3 w-full'>
       <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
@@ -108,7 +129,7 @@ const DashProfile = () => {
       </form>
       <div className='text-red-500 flex justify-between mt-5'>
         <span onClick={() => setShowModal(true)} className='cursor-pointer'>Delete Account</span>
-        <span className='cursor-pointer'>Sign Out</span>
+        <span onClick={handleSignout} className='cursor-pointer'>Sign Out</span>
       </div>
       {updateUserSuccess && (
         <Alert color = 'success'  className='mt-5'>
