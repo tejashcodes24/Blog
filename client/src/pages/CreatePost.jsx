@@ -11,6 +11,7 @@ const CreatePost = () => {
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
+  const [publishError, setPublishError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -62,10 +63,36 @@ const CreatePost = () => {
     }
   };
 
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('/api/post/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setPublishError(data.message);
+        return;
+      }
+
+      if(res.ok){
+        setPublishError(null);
+        navigate(`/post/${data.slug}`);
+      }
+    } catch (error) {
+      setPublishError('Something went wrong');
+    }
+  };
+
+
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
-      <form className='flex flex-col gap-4'>
+      <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
             <TextInput type='text' placeholder='Title' required id='title'
              className='flex-1'
@@ -118,6 +145,11 @@ const CreatePost = () => {
           }}
         />
         <Button type='submit' className='bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:bg-gradient-to-l focus:ring-purple-200 dark:focus:ring-purple-800'>Publish</Button>
+        {publishError && (
+          <Alert className='mt-5' color='failure'>
+            {publishError}
+          </Alert>
+        )}
       </form>
     </div>
   )
