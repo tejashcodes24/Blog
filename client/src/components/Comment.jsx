@@ -6,7 +6,7 @@ import { FaThumbsUp } from 'react-icons/fa'
 import { useSelector } from 'react-redux';
 import { Textarea, Button } from 'flowbite-react';
 
-const Comment = ({ comment, onLike, onEdit }) => {
+const Comment = ({ comment, onLike, onEdit, onDelete }) => {
     const [user, setUser] = useState({});
     const { currentUser } = useSelector((state) => state.user);
     const [isEditing, setIsEditing] = useState(false);
