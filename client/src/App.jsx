@@ -15,6 +15,8 @@ import UpdatePost from './pages/UpdatePost'
 import PostPage from './pages/PostPage'
 import ScrollToTop from './components/ScrollToTop'
 import Search from './pages/Search'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsAndConditions from './pages/TermsAndConditions'
 const App = () => {
   return (
     <BrowserRouter>
@@ -26,6 +28,8 @@ const App = () => {
         <Route path = '/sign-in' element = {<SignIn />} />
         <Route path = '/sign-up' element = {<SignUp />} />
         <Route path = '/search' element = {<Search />} />
+        <Route path = '/privacy&policy' element = {<PrivacyPolicy />} />
+        <Route path = '/terms&condition' element = {<TermsAndConditions />} />
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element = {<Dashboard />} />
         </Route>
