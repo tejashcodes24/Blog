@@ -10,6 +10,6 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [flowbiteReact, require('tailwind-scrollbar'),require("@tailwindcss/line-clamp")],
+  plugins: [flowbiteReact, require('tailwind-scrollbar')],
   darkMode: 'class', // <-- this is required
 }
